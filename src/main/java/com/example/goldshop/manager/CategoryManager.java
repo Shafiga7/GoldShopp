@@ -26,14 +26,14 @@ public class CategoryManager implements CategoryService {
     public List<CategoryDTO> getAll() {
         return categoryRepository.findAll()
                 .stream()
-                .map(categoryMapper::toCategoryDto)
+                .map(categoryMapper::toCategoryDTO)
                 .toList();
     }
 
     @Override
     public CategoryDTO getById(int id) { return categoryRepository.findById(id)
             .stream()
-            .map(categoryMapper::toCategoryDto)
+            .map(categoryMapper::toCategoryDTO)
             .findFirst().orElseThrow(()->new CategoryNotFoundException("Kateqoriya tapilmadi"));
     }
 

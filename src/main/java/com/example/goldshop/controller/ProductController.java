@@ -1,4 +1,5 @@
 package com.example.goldshop.controller;
+import com.example.goldshop.dto.ProductDTO;
 import com.example.goldshop.entity.Product;
 import com.example.goldshop.manager.ProductManager;
 import lombok.AllArgsConstructor;
@@ -16,11 +17,11 @@ public class ProductController {
 
 
     @GetMapping
-    public List<Product> getAll(){ return productManager.getAll();
+    public List<ProductDTO> getAll(){ return productManager.getAll();
     }
 
     @GetMapping("/{id}")
-    public Product getById(@PathVariable int id){ return productManager.getById(id);
+    public ProductDTO getById(@PathVariable int id){ return productManager.getById(id);
     }
 
     @PostMapping

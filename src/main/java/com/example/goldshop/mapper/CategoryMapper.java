@@ -5,9 +5,9 @@ import com.example.goldshop.dto.CategoryDTO;
 import com.example.goldshop.entity.Category;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CategoryMapper {
-    Category toEntity(CategoryDTO categoryDTO);
+    CategoryDTO toCategoryDTO (Category category);
 
-   CategoryDTO toCategoryDto(Category category);
+    Category toEntity(CategoryDTO categoryDTO);
 }
