@@ -28,4 +28,7 @@ public class Product {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     Category category;
 
+
+    public Product(int id, String name, double price, int carat) {
+    }
 }

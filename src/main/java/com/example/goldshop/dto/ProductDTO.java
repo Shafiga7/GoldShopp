@@ -2,10 +2,8 @@ package com.example.goldshop.dto;
 
 public record ProductDTO (
 
-    String product_name,
-    double price,
-    Integer carat
+        Integer id,
 
-){
+        String name, double price, int carat){
 
 }
