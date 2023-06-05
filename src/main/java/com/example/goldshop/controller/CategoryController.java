@@ -4,6 +4,8 @@ import com.example.goldshop.dto.CategoryDTO;
 import com.example.goldshop.entity.Category;
 import com.example.goldshop.manager.CategoryManager;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,12 +15,14 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoryController {
 
+    Logger logger = LoggerFactory.getLogger(CategoryController.class);
     private final CategoryManager categoryManager;
-//jhbjb
+
 
 
     @GetMapping
     public List<CategoryDTO> getAll(){
+        logger.info("getAll request accepted");
         return categoryManager.getAll();
     }
 
