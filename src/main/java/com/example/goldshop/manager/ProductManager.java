@@ -2,10 +2,13 @@ package com.example.goldshop.manager;
 
 import com.example.goldshop.dto.ProductDTO;
 import com.example.goldshop.dto.ProductDTOManager;
+import com.example.goldshop.dto.ProductPageResponse;
 import com.example.goldshop.entity.Product;
 import com.example.goldshop.exception.ProductNotFoundException;
 import com.example.goldshop.mapper.ProductMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.example.goldshop.repository.ProductRepository;
 import com.example.goldshop.service.ProductService;
@@ -23,11 +26,16 @@ public class ProductManager implements ProductService {
     private final ProductMapper productMapper;
 
     @Override
-    public List<ProductDTO> getAll() {
-        return productRepository.findAll()
-                .stream()
-                .map(productMapper::toProductDTO)
-                .toList();
+    public ProductPageResponse getAll(int page, int count) {
+        Page<Product> productPage=productRepository.findAll(PageRequest.of(page,count));
+
+
+        return new ProductPageResponse(
+                productPage.getContent().stream().map(productMapper::toProductDTO).toList(),
+                productPage.getTotalElements(),
+                productPage.getTotalPages(),
+                productPage.hasNext()
+        );
     }
 
     @Override
@@ -38,8 +46,8 @@ public class ProductManager implements ProductService {
     }
 
     @Override
-    public void addProduct(Product product) {
-        productRepository.save(product);
+    public void addProduct(ProductDTO productDTO) {
+        productRepository.save(productMapper.toEntity(productDTO));
     }
 
     @Override

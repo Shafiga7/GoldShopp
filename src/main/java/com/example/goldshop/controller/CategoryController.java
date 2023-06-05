@@ -1,29 +1,30 @@
 package com.example.goldshop.controller;
 
 import com.example.goldshop.dto.CategoryDTO;
-import com.example.goldshop.entity.Category;
+import com.example.goldshop.dto.CategoryPageResponse;
 import com.example.goldshop.manager.CategoryManager;
-import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/categories")
-@AllArgsConstructor
 public class CategoryController {
 
-    Logger logger = LoggerFactory.getLogger(CategoryController.class);
+    Logger logger= LoggerFactory.getLogger(CategoryController.class);
     private final CategoryManager categoryManager;
 
 
 
+    public CategoryController(CategoryManager categoryManager) {
+        this.categoryManager = categoryManager;
+    }
     @GetMapping
-    public List<CategoryDTO> getAll(){
+    public CategoryPageResponse getAll(@RequestParam(value = "page") int page, @RequestParam(value="count") int count){
         logger.info("getAll request accepted");
-        return categoryManager.getAll();
+        return categoryManager.getAll(page,count);
+
     }
 
     @GetMapping("/{id}")
@@ -32,8 +33,9 @@ public class CategoryController {
     }
 
     @PostMapping
-    public void addCategory(@RequestBody Category category){
-        categoryManager.addCategory(category);
+    @ResponseStatus(code= HttpStatus.CREATED)
+    public void addCategory(@RequestBody CategoryDTO categoryDTO){
+        categoryManager.addCategory(categoryDTO);
     }
 
     @DeleteMapping("/{id}")
