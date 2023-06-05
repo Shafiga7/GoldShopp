@@ -1,17 +1,19 @@
 package com.example.goldshop.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
-import java.util.List;
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="kateqoriyalar")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Category {
     @Id
     @GeneratedValue
@@ -19,8 +21,5 @@ public class Category {
 
     @Column(name = "ad")
     private String name;
-
-//    @OneToMany(mappedBy = "category")
-//    List<Category> categories;
 
 }
