@@ -2,6 +2,7 @@ package com.example.goldshop.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,17 +10,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity(name="mehsullar")
 
 public class Product {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer product_id;
     @Column(name="mehsul_adi")
-    private String product_name;
+    private String name;
     @Column(name="qiymet")
-    private double price;
+    private Double price;
     @Column(name="karat")
     private Integer carat;
 

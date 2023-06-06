@@ -52,6 +52,7 @@ public class UserManager implements UserService {
     public void register(RegisterRequest request) {
         User user = userMapper.toUserFromRegisterRequest(request);
         user.setPassword(encoder.encode(request.password()));
+        user.setRole("USER");
         userRepository.save(user);
     }
 }

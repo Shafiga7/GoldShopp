@@ -10,6 +10,6 @@ import java.util.function.Function;
 public class ProductDTOManager implements Function<Product, ProductDTO> {
 
     public ProductDTO apply(Product product) {
-        return new ProductDTO(1, product.getProduct_name(), product.getPrice(), product.getCarat());
+        return new ProductDTO(product.getName(), product.getPrice(), product.getCarat());
     }
 }
